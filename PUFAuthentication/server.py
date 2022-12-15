@@ -80,7 +80,7 @@ class server:
                     _ = self.authentication(client, data=data)
                 else:
                     self.send_msg(client=client, data={"request_type": "enrolment_request",
-                                                       "message": "Send your PUF instance for enrollment",
+                                                       "message": "Send your ArbiterPUF instance for enrollment",
                                                        "number_of_response": self._number_of_response})
             # enrollment
             elif data["request_type"] == "enrolment_request":

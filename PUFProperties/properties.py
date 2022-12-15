@@ -1,4 +1,4 @@
-# Verify Properties of the PUF
+# Verify Properties of the ArbiterPUF
 
 from math import log2
 from scipy.spatial.distance import hamming
@@ -9,7 +9,7 @@ def hammingDistance(list1, list2):
 
 
 def H(response):
-    """Measure the randomness of a PUF for response """
+    """Measure the randomness of a ArbiterPUF for response """
     bit_sum = 0
     Nr = len(response)
     for i in range(Nr):
@@ -20,7 +20,7 @@ def H(response):
 
 
 def U(k, Ri):
-    """Measure the Uniqueness of a PUF for challenge c among k chips between response set Ri and Rj"""
+    """Measure the Uniqueness of a ArbiterPUF for challenge c among k chips between response set Ri and Rj"""
     uk = 0
     for i in range(k - 1):
         for j in range(i + 1):
@@ -37,7 +37,7 @@ def MU(Uk):
 
 
 # def R(Ri, Ri_):
-#     """Reliability Between PUF response Ri and  PUF response Ri_(t), response at different conditions """
+#     """Reliability Between ArbiterPUF response Ri and  ArbiterPUF response Ri_(t), response at different conditions """
 #     hd_indra = 0
 
 #     for t in range(len(Ri_)):
@@ -47,7 +47,7 @@ def MU(Uk):
 
 
 def D(k, R):
-    """Measures how different are the set of responses from the same PUF instance to different challenges"""
+    """Measures how different are the set of responses from the same ArbiterPUF instance to different challenges"""
     norma = 4/k**2
     sum_ele = 0
     for i in range(k-1):

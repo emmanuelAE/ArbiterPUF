@@ -106,7 +106,7 @@ my_client.run()
 
 sleep(30)
 print("\n\n")
-print("I'm the same client but 100 years later so my PUF is a little old ;)\n")
+print("I'm the same client but 100 years later so my ArbiterPUF is a little old ;)\n")
 
 puf_1.aging()
 my_client2 = client(puf=puf_1, id=7)
