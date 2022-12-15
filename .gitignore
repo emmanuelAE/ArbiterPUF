@@ -7,8 +7,8 @@ __pycache__/
 *.so
 
 # out files 
-out/csv/*
-out/puf_instances/*
+out/csv/
+out/puf_instances/
 
 #OS file
 .DS_Store
