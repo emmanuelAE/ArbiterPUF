@@ -10,8 +10,11 @@ __pycache__/
 out/csv/
 out/puf_instances/
 
-#OS file
+# OS file
 .DS_Store
+
+# test files
+test.py
 
 # Distribution / packaging
 .Python
