@@ -2,10 +2,8 @@ import random
 import socket
 from threading import Thread
 from time import sleep
-
 import compress_pickle
-
-from model.PUF import PUF
+from model.ArbiterPUF import ArbiterPUF
 
 
 class client:
@@ -100,7 +98,7 @@ class client:
         self.send_msg(data={"request_type": "init_comm", "message": "coucou"})
 
 
-puf_1 = PUF(64)
+puf_1 = ArbiterPUF(64)
 my_client = client(puf=puf_1, id=7)
 my_client.run()
 

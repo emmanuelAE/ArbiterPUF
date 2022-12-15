@@ -10,7 +10,6 @@ from PUFProperties.properties import U
 from PUFProperties.properties import MU
 from model.PUF import PUF
 from fileManagement import utilities
-from PUFsim.LoadPufFromMemory import loadPufFromMemory
 
 NB_OF_CRPs = 10_000
 

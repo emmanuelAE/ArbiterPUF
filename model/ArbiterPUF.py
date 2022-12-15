@@ -1,10 +1,10 @@
 import random
 
-from model.AbstractPUF import AbstractPUF
+from model.PUF import PUF
 from model.Stage import Stage
 
 
-class ArbiterPUF(AbstractPUF):
+class ArbiterPUF(PUF):
     """
     Arbiter ArbiterPUF. can be initialise like this:
     -> ArbiterPUF(number_of_stage) example: ArbiterPUF(64)
