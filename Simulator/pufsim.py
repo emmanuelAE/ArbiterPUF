@@ -54,7 +54,7 @@ def sim(number_of_stage: int = 64, number_of_PUF: int = 10, number_of_CRPs=10_00
 
         # Display sim infos
         print(f"\t\t-----------------------------------------------\n\t\t\t\t\t- Simulation started -                "
-              f"\n\t\t\tCreating {number_of_PUF} PUFs. each PUF will generate \n"
+              f"\n\t\t\tCreating {number_of_PUF} PUFs. each ArbiterPUF will generate \n"
               f"\t\t\t{number_of_CRPs} CRPs\n\t\t-----------------------------------------------")
 
         for i in range(number_of_PUF):
@@ -67,7 +67,7 @@ def sim(number_of_stage: int = 64, number_of_PUF: int = 10, number_of_CRPs=10_00
             # write the header
             csv_writer.writerow(_header)
 
-            # create the different CPRs of this instance of PUF
+            # create the different CPRs of this instance of ArbiterPUF
             puf = PUF_instances[i]
             print("\033[93m-- Starting CRPs creation and saving in csv file --\033[0m")
             for j in range(number_of_CRPs):
@@ -80,12 +80,12 @@ def sim(number_of_stage: int = 64, number_of_PUF: int = 10, number_of_CRPs=10_00
                 # write in the csv this instance csv file
                 csv_writer.writerow(_data)
 
-            # save the binary instance of our PUF using pickle
+            # save the binary instance of our ArbiterPUF using pickle
             # WARNING: pickle isn't secure always unpickle data that you trust
             print(f"\033[93m-- Saving our puf object as puf_object{i + 1}.puf in puf_instance_object --\033[0m")
             pickle.dump(puf, open(f"puf_instance_object/puf_object{i + 1}.puf", "wb"))
 
-        print("\033[92m\t\t-----------------------------------------------\n\t\t\t\t\t- PUF Simulation SUCCEED - "
+        print("\033[92m\t\t-----------------------------------------------\n\t\t\t\t\t- ArbiterPUF Simulation SUCCEED - "
               "\n\t\t-----------------------------------------------\033[0m")
 
     else:
@@ -98,7 +98,7 @@ def sim(number_of_stage: int = 64, number_of_PUF: int = 10, number_of_CRPs=10_00
 
 
 def properties_sim():
-    # create a PUF for simulation
+    # create a ArbiterPUF for simulation
     puf = PUF(64)
 
     # properties calculation
@@ -110,7 +110,7 @@ def properties_sim():
         puf_response.append(puf.challenge(create_random_challenge(64)))
     p, h = H(puf_response)
 
-    print("Evaluating PUF properties...")
+    print("Evaluating ArbiterPUF properties...")
     sleep(2)
     print("p = {}, h = {}".format(p, h))
     print('d = ', D(10_000, puf_response))
@@ -118,7 +118,7 @@ def properties_sim():
     # Uniqueness
 
     if (len(utilities.get_dir_file_name("puf_instance_object/"))) == 0:
-        print('NO PUF INSTANCES : start puf generation ')
+        print('NO ArbiterPUF INSTANCES : start puf generation ')
         sim(64, 10, 10_000)
 
     responses = []

@@ -1,2 +1,2 @@
 # ArbiterPUF
- Simulator for Arbiter PUF (Physical Unclonable Function)
+ Simulator for Arbiter ArbiterPUF (Physical Unclonable Function)

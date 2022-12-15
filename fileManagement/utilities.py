@@ -62,7 +62,7 @@ def load_puf_from_memory(file_path):
             if user_response:
                 response = puf1.challenge()
                 challenge = puf1.challenge_vector
-                print(f"*** PUF {i + 1} ***")
+                print(f"*** ArbiterPUF {i + 1} ***")
                 print("-- last CPRs datas --")
                 print("stages",
                       [
