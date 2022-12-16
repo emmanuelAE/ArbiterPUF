@@ -90,7 +90,7 @@ class Client:
 
 
 puf_1 = ArbiterPUF(64)
-my_client = Client(puf=puf_1, id=7, host="localhost", port=8081)
+my_client = Client(puf=puf_1, id=7, host="localhost", port=8080)
 my_client.run()
 
 sleep(30)
@@ -98,5 +98,5 @@ print("\n\n")
 print("I'm the same client but 100 years later so my ArbiterPUF is a little old ;)\n")
 
 puf_1.aging()
-my_client2 = Client(puf=puf_1, id=7)
+my_client2 = Client(puf=puf_1, id=7, host="localhost", port=8080)
 my_client2.run()
