@@ -6,19 +6,16 @@ import compress_pickle
 from model.ArbiterPUF import ArbiterPUF
 
 
-class client:
-    def __init__(self, puf, id):
+class Client:
+    def __init__(self, puf, id, host, port):
+        self.port = port
+        self.host = host
         self._socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.puf = puf
         self.id = id
 
-    # def noisemaker(self, bit):
-    #     _probability = random.random()
-    #     if _probability <= 1:
-    #         return 1 - bit
-    #     return bit
-
-    def create_random_challenge(self, nb_of_bit):
+    @staticmethod
+    def _create_random_challenge(nb_of_bit):
         challenge = []
         for i in range(nb_of_bit):
             challenge.append(random.randint(0, 1))
@@ -46,7 +43,7 @@ class client:
                 print("server : ", data["message"])
                 print("client :  Sending my CRPs for enrollment")
 
-                challenge = self.create_random_challenge(64)
+                challenge = self._create_random_challenge(64)
                 response = self.puf.challenge(challenge)
                 # print("response : ", response)
                 response_vector = []
@@ -86,20 +83,14 @@ class client:
             # sleep(3)
 
     def run(self):
-        host = "localhost"
-        port = 8081
-
-        self._socket.connect((host, port))
+        self._socket.connect((self.host, self.port))
         Thread(target=self.receive_msg).start()  # , args=[socket])
-
-        # envoi.start()
         print("client :  Asking for the best developers ever")
-
         self.send_msg(data={"request_type": "init_comm", "message": "coucou"})
 
 
 puf_1 = ArbiterPUF(64)
-my_client = client(puf=puf_1, id=7)
+my_client = Client(puf=puf_1, id=7, host="localhost", port=8081)
 my_client.run()
 
 sleep(30)
@@ -107,5 +98,5 @@ print("\n\n")
 print("I'm the same client but 100 years later so my ArbiterPUF is a little old ;)\n")
 
 puf_1.aging()
-my_client2 = client(puf=puf_1, id=7)
+my_client2 = Client(puf=puf_1, id=7)
 my_client2.run()
