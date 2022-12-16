@@ -5,7 +5,7 @@ from threading import Thread, Lock
 import socket
 
 
-class server:
+class Server:
     def __init__(self, host, port):
         self.port = port
         self.host = host
@@ -71,7 +71,6 @@ class server:
 
     def receive_msg(self, client, lock):
         while True:
-            # print(lock.locked())
             # lock.acquire()
             data = client.recv(5000)
             data = compress_pickle.loads(data, compression="gzip")
@@ -117,9 +116,6 @@ class server:
             # i+=1
 
     def run(self):
-        # Le script s'arrête jusqu'a une connection
-
-        # send_thread = Thread(target=self.send_msg)  # , args=[client])
         close_thread = Thread(target=self._close_connection)
         wait_thread = Thread(target=self.wait_connection)
 
@@ -135,5 +131,5 @@ class server:
 
 
 #
-my_server = server("localhost", 8081)
+my_server = Server("localhost", 8081)
 my_server.run()
