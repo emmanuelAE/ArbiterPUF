@@ -2,6 +2,7 @@ import csv
 import os.path
 import pickle
 import random
+import tkinter.filedialog
 
 from PUFProperties.properties import H, D, U, MU
 from fileManagement import utilities
@@ -9,10 +10,11 @@ from model.ArbiterPUF import ArbiterPUF
 
 
 class Simulator:
-    def __init__(self, out_file_path):
-        self.out_file_path = out_file_path
-        self._csv_path = os.path.join(out_file_path, "csv")
-        self._puf_instance_path = os.path.join(out_file_path, "puf_instances")
+    def __init__(self):
+        self.out_file_path = tkinter.filedialog.askdirectory(initialdir=os.getcwd(), title="Choose the output "
+                                                                                           "directory please")
+        self._csv_path = os.path.join(self.out_file_path, "csv")
+        self._puf_instance_path = os.path.join(self.out_file_path, "puf_instances")
 
     @staticmethod
     def _create_csv_header(number_column):
