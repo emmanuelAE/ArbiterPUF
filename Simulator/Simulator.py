@@ -42,6 +42,9 @@ class Simulator:
         if not utilities.ask_confirmation(message=warning, question=question):
             print("Canceled")
             return
+        
+        # Create the csv, puf_instance directory if not exist
+        utilities.create_dir([self._csv_path, self._puf_instance_path])
 
         # the user response is Y
         # deleting olds csv and puf objects

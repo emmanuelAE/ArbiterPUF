@@ -5,6 +5,11 @@ import pickle
 
 
 def ask_confirmation(message=None, question=None):
+    """
+    :param message: message to display
+    :param question: question to ask
+    :return: True if the user response is Y or y, False otherwise
+    """
     print(f"\033[91m {message}")
     choice = input(f"{question}\033[0m\n")
     if 'Y' in choice or 'y' in choice:
@@ -13,18 +18,30 @@ def ask_confirmation(message=None, question=None):
 
 
 def get_dir_file_name(dir_path):
+    """
+    :param dir_path: directory path
+    :return: list of file name in the directory
+    """
     try:
         dir_list = os.listdir(dir_path)
         return dir_list
     except Exception as e:
-        raise Exception("make sure that it's a directory please", e)
+        raise Exception("make sure that it's a directory please", e)    
 
 
 def delete_file(file_name):
+    """
+    :param file_name: file name
+    :return: None
+    """
     os.remove(file_name)
 
 
 def delete_dir_file(dir_path):
+    """
+    :param dir_path: directory path
+    :return: None
+    """
     path = os.path.join(os.getcwd(), dir_path)
     file_list = get_dir_file_name(dir_path)
     for file_name in file_list:
@@ -32,11 +49,28 @@ def delete_dir_file(dir_path):
 
 
 def number_of_file(dir_path):
+    """
+    :param dir_path: directory path
+    :return: number of file in the directory
+    """
     file_list = get_dir_file_name(dir_path)
     return len(file_list)
 
 
+def create_dir(dir_path_list):
+    """
+    :param dir_path_list: list of directory path
+    :return: None
+    """
+    for dir_path in dir_path_list:
+        if not os.path.exists(dir_path):
+            os.makedirs(dir_path)
+
 def load_csv_data_from_memory(dir_path):
+    """
+    :param dir_path: directory path
+    :return: list of csv data
+    """
     csv_file_list = get_dir_file_name(dir_path)
     data = []
     _data = []
@@ -52,6 +86,10 @@ def load_csv_data_from_memory(dir_path):
 
 
 def load_puf_from_memory(file_path):
+    """
+    :param file_path: directory path
+    :return: list of puf object
+    """
     try:
         puf_list = []
         user_response = ask_confirmation("", "Do you want print puf instance")
