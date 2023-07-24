@@ -4,9 +4,13 @@ from model.Component import Component
 class Multiplexer(Component):
 
     def __init__(self):
-        """Create a Multiplexer and give it a delay that follow the normal distribution"""
+        """
+        A class that represent a Multiplexer in an Arbiter PUF.
+        """
         super().__init__()
 
     def challenge(self) -> float:
-        """Add a to the path time the delay of the Multiplexer"""
+        """
+        return the delay of the Multiplexer
+        """
         return self.delay

@@ -1,15 +1,25 @@
 import random
-
 from model.PUF import PUF
 from model.Stage import Stage
 
-
+#TODO add setter and getter to this class.
 class ArbiterPUF(PUF):
     """
-    Arbiter ArbiterPUF. can be initialise like this:
-    -> ArbiterPUF(number_of_stage) example: ArbiterPUF(64)
-    -> ArbiterPUF(challenge_vector) example: ArbiterPUF([0,0,1,0,1,1])
-    -> ArbiterPUF(serie_of_challenge) example: ArbiterPUF([0,1,1,0],[1,1,1,1],[0,0,0,0]])
+    A class that represent an Arbiter Physical Unclonable Function (PUF)
+
+    Args : 
+    number_of_stage : int, The number of stage in the Arbiter PUF.
+    challenge_vector : List[Bit], A challenge vector to simulate the Arbiter PUF.
+    serie_of_challenge : List[List[Bit]], A serie of challenge to generate a PUF fingerPrint.
+    
+    The PUF object is initialise we one of these Args at once 
+    Example: 
+            ArbiterPUF(number_of_stage) example: ArbiterPUF(64)
+            ArbiterPUF(challenge_vector) example: ArbiterPUF([0,0,1,0,1,1])
+            ArbiterPUF(serie_of_challenge) example: ArbiterPUF([0,1,1,0],[1,1,1,1],[0,0,0,0]])
+
+    Methods : 
+            challenge(challenge_vector : List[Bit]), Return the PUF response to that challenge
     """
     def __init__(self, *args):
         # the attributes that can be use to create
@@ -18,7 +28,7 @@ class ArbiterPUF(PUF):
         self.challenge_vector = None
         self.series_of_challenge = None
 
-        # Our ArbiterPUF can be crate with the number_of_stage of state or with a challenge or with a serie of challenge
+        # Our ArbiterPUF can be create with the number_of_stage of state or with a challenge or with a serie of challenge
         if args == ():
             raise Exception("You have to specify the number of stage or a challenge or a serie of challenge")
         else:
@@ -50,7 +60,7 @@ class ArbiterPUF(PUF):
             self.number_of_stage = len(self.challenge_vector) if self.challenge_vector is not None \
                 else len(self.series_of_challenge[0])
         # create now the different stage of the ArbiterPUF
-        self.create_stage()
+        self._create_stage()
 
     def __challenge(self):
         path_1_time = 0.0
@@ -70,6 +80,10 @@ class ArbiterPUF(PUF):
         return self.add_internal_error(response_before_inter_error)
 
     def challenge(self, challenge_vector: list = None):
+        """
+        param : 
+
+        """
         _temp = 0
         for challenge in (self.challenge_vector, self.series_of_challenge, challenge_vector):
             if challenge is None:
@@ -89,14 +103,14 @@ class ArbiterPUF(PUF):
 
         return self.__challenge()
 
-    def serie_challenge(self):
+    def _serie_challenge(self):
         fingerprint = ""
         for challenge_vector in self.series_of_challenge:
             self.challenge_vector = challenge_vector
             fingerprint += str(self.__challenge()) + " "
         return fingerprint
 
-    def create_stage(self):
+    def _create_stage(self):
         """Create the different stage of our ArbiterPUF"""
         if self.number_of_stage is not None:
             for i in range(self.number_of_stage):
