@@ -12,9 +12,7 @@ def ask_confirmation(message=None, question=None):
     """
     print(f"\033[91m {message}")
     choice = input(f"{question}\033[0m\n")
-    if 'Y' in choice or 'y' in choice:
-        return True
-    return False
+    return 'Y' in choice or 'y' in choice 
 
 
 def get_dir_file_name(dir_path):
