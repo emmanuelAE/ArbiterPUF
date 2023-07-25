@@ -40,7 +40,7 @@ class Stage(Component):
         """
         raise Exception("to challenge a stage, use Stage.stage_challenge(int,int)")
 
-    def stage_challenge(self, actual_challenge_bit: int, previous_challenge_bit: int) -> tuple(float, float):
+    def stage_challenge(self, actual_challenge_bit: int, previous_challenge_bit: int) -> (float, float):
         """
         params : actual_challenge_bit : int, previous_challenge_bit : int
         return the additional delay of the path 1 and the path 2 according to the actual challenge bit and the
